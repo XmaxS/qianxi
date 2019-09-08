@@ -2,10 +2,12 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="qx-common" />
         <module name="qx-gateway" />
         <module name="qx-item-interface" />
         <module name="qx-item-service" />
@@ -19,6 +21,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="qianxi" options="-parameters" />
+      <module name="qx-common" options="-parameters" />
       <module name="qx-gateway" options="-parameters" />
       <module name="qx-item" options="-parameters" />
       <module name="qx-item-interface" options="-parameters" />

@@ -12,6 +12,7 @@
         <module>qx-registry</module>
         <module>qx-gateway</module>
         <module>qx-item</module>
+        <module>qx-common</module>
     </modules>
 
     <parent>
