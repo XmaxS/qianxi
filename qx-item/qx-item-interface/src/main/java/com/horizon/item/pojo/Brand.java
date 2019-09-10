@@ -6,16 +6,15 @@ import tk.mybatis.mapper.annotation.KeySql;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-//类别类
+//品牌类
 @Data
-@Table(name = "tb_category")
-public class Category {
+@Table(name = "tb_brand")
+public class Brand {
 
     @Id
     @KeySql(useGeneratedKeys = true)
     private Long id;
     private String name;
-    private Long parentId;
-    private Boolean isParent;
-    private Integer sort;
+    private String image;
+    private Character letter;
 }

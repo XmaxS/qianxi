@@ -12,6 +12,7 @@
         <module name="qx-item-interface" />
         <module name="qx-item-service" />
         <module name="qx-registry" />
+        <module name="qx-upload" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -27,6 +28,7 @@
       <module name="qx-item-interface" options="-parameters" />
       <module name="qx-item-service" options="-parameters" />
       <module name="qx-registry" options="-parameters" />
+      <module name="qx-upload" options="-parameters" />
       <module name="registry" options="-parameters" />
     </option>
   </component>

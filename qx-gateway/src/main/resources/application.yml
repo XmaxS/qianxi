@@ -9,6 +9,10 @@ zuul:
   prefix: /api
   routes:
     item-service: /item/**
+    upload-service:
+      path: /upload/**
+      serviceId: upload-service
+      strip-prefix: false #不去除前缀
 
 hystrix:
   command:

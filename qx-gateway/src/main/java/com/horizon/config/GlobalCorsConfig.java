@@ -15,7 +15,7 @@ public class GlobalCorsConfig {
         //1.添加Cors配置信息
         CorsConfiguration configuration = new CorsConfiguration();
         //1.允许的域，不要写*，否则cookie就无法使用了
-        configuration.addAllowedOrigin("http://manage.horizon.com");
+        configuration.addAllowedOrigin("http://manage.leyou.com");
         //2.是否发送cookie信息
         configuration.setAllowCredentials(true);
         //3.允许的请求方式
