@@ -68,4 +68,13 @@ public class BrandService {
             }
         }
     }
+
+    public Brand queryById(Long id){
+        Brand brand = brandMapper.selectByPrimaryKey(id);
+        if (brand == null){
+            throw new QxException(ExceptionEnums.Brand_NOT_FOUND);
+        }
+        return brand;
+    }
+
 }
