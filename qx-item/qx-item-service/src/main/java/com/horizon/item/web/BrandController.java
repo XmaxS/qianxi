@@ -19,11 +19,12 @@ public class BrandController {
 
     //查询品牌
     @GetMapping("page")
-    public ResponseEntity<PageResult<Brand>> queryBrandPage(@RequestParam(value = "page",defaultValue = "1")Integer page,
-                                                            @RequestParam(value = "rows",defaultValue = "5")Integer rows,
-                                                            @RequestParam(value = "sortBy",required = false)String sortBy,
-                                                            @RequestParam(value = "desc",defaultValue = "false")Boolean desc,
-                                                            @RequestParam(value = "key",required = false)String key
+    public ResponseEntity<PageResult<Brand>> queryBrandPage(
+            @RequestParam(value = "page",defaultValue = "1")Integer page,
+            @RequestParam(value = "rows",defaultValue = "5")Integer rows,
+            @RequestParam(value = "sortBy",required = false)String sortBy,
+            @RequestParam(value = "desc",defaultValue = "false")Boolean desc,
+            @RequestParam(value = "key",required = false)String key
     ){
         PageResult<Brand> result = brandService.queryBrandByPage(page,rows,sortBy,desc,key);
         return ResponseEntity.ok(result);
@@ -40,5 +41,11 @@ public class BrandController {
     @GetMapping("/cid/{cid}")
     public ResponseEntity<List<Brand>> queryBrandByCid(@PathVariable("cid")Long cid){
         return ResponseEntity.ok(brandService.queryBrandByCid(cid));
+    }
+
+    //根据id查询品牌
+    @GetMapping("{id}")
+    public ResponseEntity<Brand> queryBrandById(@PathVariable("id")Long id){
+        return ResponseEntity.ok(brandService.queryById(id));
     }
 }

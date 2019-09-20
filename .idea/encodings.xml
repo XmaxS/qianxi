@@ -8,6 +8,7 @@
     <file url="file://$PROJECT_DIR$/qx-item/qx-item-interface" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/qx-item/qx-item-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/qx-registry" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qx-search" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/qx-upload" charset="UTF-8" />
   </component>
 </project>
