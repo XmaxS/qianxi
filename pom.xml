@@ -18,6 +18,8 @@
         <module>qx-page</module>
         <module>qx-user</module>
         <module>qx-auth-center</module>
+        <module>qx-cart</module>
+        <module>qx-order</module>
     </modules>
 
     <parent>

@@ -14,7 +14,7 @@ import java.security.PublicKey;
 @Component
 @Slf4j
 @Data
-@ConfigurationProperties(prefix = "qx.jwt")
+@ConfigurationProperties(prefix = "ly.jwt")
 public class JwtProperties {
 
     private String secret;

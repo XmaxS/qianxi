@@ -26,6 +26,12 @@ public enum ExceptionEnums {
     INVALID_VERIFY_CODE(400,"无效的验证码"),
     USERNAME_OR_PASSWORD_ERROR(400,"用户名或密码错误"),
     INVALID_USERNAME_PASSWORD(400,"用户名或密码错误"),
+    RECEIVER_ADDRESS_NOT_FOUND(400,"收货地址未找到"),
+    ORDER_STATUS_EXCEPTION(400,"订单状态异常"),
+    CREATE_PAY_URL_ERROR(400,"创建支付失败"),
+    ORDER_NOT_FOUND(400,"订单没找到"),
+    WX_PAY_SIGN_INVALID(400,"微信支付异常"),
+    WX_PAY_NOTIFY_PARAM_ERROR(400,"微信支付参数异常"),
     INVAILD_USER_DATA_TYPE(400,"用户数据类型不正确")
     ;
     private int code;

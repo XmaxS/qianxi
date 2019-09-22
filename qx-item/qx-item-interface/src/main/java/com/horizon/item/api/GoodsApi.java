@@ -1,13 +1,12 @@
 package com.horizon.item.api;
 
 import com.horizon.common.vo.PageResult;
+import com.horizon.item.dto.CartDto;
 import com.horizon.item.pojo.Sku;
 import com.horizon.item.pojo.Spu;
 import com.horizon.item.pojo.SpuDetail;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,4 +35,19 @@ public interface GoodsApi {
      */
     @GetMapping("spu/{id}")
     Spu querySpuById(@PathVariable("id")Long id);
+
+    /**
+     * 根据sku ids查询sku
+     * @param ids
+     * @return
+     */
+    @GetMapping("sku/list/ids")
+    List<Sku> querySkusByIds(@RequestParam("ids") List<Long> ids);
+
+    /**
+     * 减库存
+     * @param cartDTOS
+     */
+    @PostMapping("stock/decrease")
+    void decreaseStock(@RequestBody List<CartDto> cartDTOS);
 }
