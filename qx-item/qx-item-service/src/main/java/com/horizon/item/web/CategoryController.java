@@ -22,13 +22,13 @@ public class CategoryController {
     //根据父节点id查询商品分类
     @GetMapping("list")
     public ResponseEntity<List<Category>> queryCategoryListByPid(@RequestParam("pid")Long pid){
-        return ResponseEntity.ok(categoryService.queryCategoryListByPid(pid));
+        return ResponseEntity.ok(categoryService.queryCategoryByPid(pid));
     }
 
     //根据id查询商品分类
     @GetMapping("list/ids")
     public ResponseEntity<List<Category>> queryCategoryByIds(@RequestParam("ids")List<Long> ids){
-        return ResponseEntity.ok(categoryService.queryBuIds(ids));
+        return ResponseEntity.ok(categoryService.queryCategoryByIds(ids));
     }
 
 }

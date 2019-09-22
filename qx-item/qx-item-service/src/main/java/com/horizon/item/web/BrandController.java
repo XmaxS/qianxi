@@ -26,7 +26,7 @@ public class BrandController {
             @RequestParam(value = "desc",defaultValue = "false")Boolean desc,
             @RequestParam(value = "key",required = false)String key
     ){
-        PageResult<Brand> result = brandService.queryBrandByPage(page,rows,sortBy,desc,key);
+        PageResult<Brand> result = brandService.queryBrandByPageAndSort(page,rows,sortBy,desc,key);
         return ResponseEntity.ok(result);
     }
 
@@ -46,12 +46,12 @@ public class BrandController {
     //根据id查询品牌
     @GetMapping("{id}")
     public ResponseEntity<Brand> queryBrandById(@PathVariable("id")Long id){
-        return ResponseEntity.ok(brandService.queryById(id));
+        return ResponseEntity.ok(brandService.queryBrandByBid(id));
     }
 
     //根据ids查询品牌
     @GetMapping("list")
     public ResponseEntity<List<Brand>> queryBrandByIds(@RequestParam("ids")List<Long> ids){
-        return ResponseEntity.ok(brandService.queryByIds(ids));
+        return ResponseEntity.ok(brandService.queryBrandByIds(ids));
     }
 }

@@ -27,7 +27,7 @@ public class GoodsController {
             @RequestParam(value = "saleable",required = false)Boolean saleable,
             @RequestParam(value = "key",required = false)String key){
 
-        return ResponseEntity.ok(goodsService.querySpuByPage(page,rows,saleable,key));
+        return ResponseEntity.ok(goodsService.querySpuByPage(page,rows,key,saleable));
 
     }
 
@@ -35,7 +35,7 @@ public class GoodsController {
     //RequestBody 接受JSON数据请求
     @PostMapping("goods")
     public ResponseEntity<Void> saveGoods(@RequestBody Spu spu){
-        goodsService.saveGoods(spu);
+        goodsService.addGoods(spu);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -50,7 +50,7 @@ public class GoodsController {
     //根据spu的id查询详情
     @GetMapping("spu/detail/{id}")
     public ResponseEntity<SpuDetail> queryDetailById(@PathVariable("id")Long id){
-        return ResponseEntity.ok(goodsService.queryDetailById(id));
+        return ResponseEntity.ok(goodsService.querySpuDetailBySpuId(id));
     }
 
     //根据spu查询下面的所有sku
@@ -66,6 +66,6 @@ public class GoodsController {
      */
     @GetMapping("spu/{id}")
     public ResponseEntity<Spu> querySpuById(@PathVariable("id")Long id){
-        return ResponseEntity.ok(goodsService.querySpuById(id));
+        return ResponseEntity.ok(goodsService.querySpuBySpuId(id));
     };
 }
