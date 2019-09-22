@@ -1,10 +1,14 @@
 package com.horizon.search.pojo;
 
+import java.util.Map;
+
 //页面请求对象
 public class SearchRequest {
     private String key; //搜索字段
 
     private Integer page; //当前页
+
+    private Map<String,String> filter; //过滤项
 
     private static final int DEFAULT_SIZE = 20; //页面大小
     private static final int DEFAULT_PAGE = 1; //默认页
@@ -31,5 +35,13 @@ public class SearchRequest {
 
     public Integer getSize(){
         return DEFAULT_SIZE;
+    }
+
+    public Map<String, String> getFilter() {
+        return filter;
+    }
+
+    public void setFilter(Map<String, String> filter) {
+        this.filter = filter;
     }
 }

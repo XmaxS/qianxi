@@ -6,6 +6,18 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   application:
     name: item-service
+  rabbitmq:
+    host: 127.0.0.1
+    username: guest
+    password: guest
+    template:
+      retry:
+        enabled: true
+        initial-interval: 10000ms
+        max-interval: 30000ms
+        multiplier: 2
+      exchange: qx.item.exchange
+    publisher-confirms: true
 
 mybatis:
   configuration:

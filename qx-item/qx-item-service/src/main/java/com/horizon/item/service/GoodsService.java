@@ -11,6 +11,7 @@ import com.horizon.item.mapper.SpuMapper;
 import com.horizon.item.mapper.StockMapper;
 import com.horizon.item.pojo.*;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,6 +41,9 @@ public class GoodsService {
 
     @Autowired
     private StockMapper stockMapper;
+
+    @Autowired
+    private AmqpTemplate amqpTemplate;
 
     public PageResult<Spu> querySpuByPage(Integer page, Integer rows, Boolean saleable, String key) {
         //分页
@@ -106,7 +110,12 @@ public class GoodsService {
         SpuDetail detail = spu.getSpuDetail();
         detail.setSpuId(spu.getId());
         detailMapper.insert(detail);
+
+        //新增sku和库存
         saveSkuAndStock(spu);
+
+        //发送rabbitmq消息
+        amqpTemplate.convertAndSend("item.insert",spu.getId());
     }
 
     public SpuDetail queryDetailById(Long id) {
@@ -182,6 +191,10 @@ public class GoodsService {
 
         //新增sku和stock
         saveSkuAndStock(spu);
+
+        //发送rabbitmq消息
+        amqpTemplate.convertAndSend("item.update",spu.getId());
+
     }
 
     private void saveSkuAndStock(Spu spu){
@@ -216,5 +229,20 @@ public class GoodsService {
         if (count != stocks.size()){
             throw new QxException(ExceptionEnums.GOODS_SAVE_ERROR);
         }
+    }
+
+    public Spu querySpuById(Long id) {
+        //查询spu
+        Spu spu = spuMapper.selectByPrimaryKey(id);
+        if (spu == null){
+            throw new QxException(ExceptionEnums.GOODS_NOT_FOUND);
+        }
+
+        //查询sku
+        spu.setSkus(querySkuBySpuId(id));
+        //查询detail
+        spu.setSpuDetail(queryDetailById(id));
+
+        return spu;
     }
 }

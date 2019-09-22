@@ -22,7 +22,11 @@ public enum ExceptionEnums {
     GOODS_STOCK_NOT_FOUND(404,"商品库存不存在"),
     GOODS_SAVE_ERROR(500,"新增商品失败"),
     GOODS_ID_CANNOT_BE_NULL(500,"商品ID不能为空"),
-    GOODS_UPDATE_ERROR(500,"修改商品失败")
+    GOODS_UPDATE_ERROR(500,"修改商品失败"),
+    INVALID_VERIFY_CODE(400,"无效的验证码"),
+    USERNAME_OR_PASSWORD_ERROR(400,"用户名或密码错误"),
+    INVALID_USERNAME_PASSWORD(400,"用户名或密码错误"),
+    INVAILD_USER_DATA_TYPE(400,"用户数据类型不正确")
     ;
     private int code;
     private String msg;

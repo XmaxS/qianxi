@@ -15,6 +15,9 @@
         <module>qx-common</module>
         <module>qx-upload</module>
         <module>qx-search</module>
+        <module>qx-page</module>
+        <module>qx-user</module>
+        <module>qx-auth-center</module>
     </modules>
 
     <parent>

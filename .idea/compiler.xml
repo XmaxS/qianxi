@@ -7,13 +7,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="qx-auth-common" />
+        <module name="qx-auth-service" />
         <module name="qx-common" />
         <module name="qx-gateway" />
         <module name="qx-item-interface" />
         <module name="qx-item-service" />
+        <module name="qx-page" />
         <module name="qx-registry" />
         <module name="qx-search" />
         <module name="qx-upload" />
+        <module name="qx-user-interface" />
+        <module name="qx-user-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -23,14 +28,20 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="qianxi" options="-parameters" />
+      <module name="qx-auth-common" options="-parameters" />
+      <module name="qx-auth-service" options="-parameters" />
       <module name="qx-common" options="-parameters" />
       <module name="qx-gateway" options="-parameters" />
       <module name="qx-item" options="-parameters" />
       <module name="qx-item-interface" options="-parameters" />
       <module name="qx-item-service" options="-parameters" />
+      <module name="qx-page" options="-parameters" />
       <module name="qx-registry" options="-parameters" />
       <module name="qx-search" options="-parameters" />
       <module name="qx-upload" options="-parameters" />
+      <module name="qx-user" options="-parameters" />
+      <module name="qx-user-interface" options="-parameters" />
+      <module name="qx-user-service" options="-parameters" />
       <module name="registry" options="-parameters" />
     </option>
   </component>
