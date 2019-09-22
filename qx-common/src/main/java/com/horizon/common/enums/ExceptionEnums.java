@@ -32,6 +32,17 @@ public enum ExceptionEnums {
     ORDER_NOT_FOUND(400,"订单没找到"),
     WX_PAY_SIGN_INVALID(400,"微信支付异常"),
     WX_PAY_NOTIFY_PARAM_ERROR(400,"微信支付参数异常"),
+    BRAND_NOT_FOUND(400,"品牌未找到"),
+    SPU_NOT_FOUND(400,"SPU未找到"),
+    SKU_NOT_FOUND(400,"SKU未找到"),
+    STOCK_NOT_FOUND(400,"库存未找到"),
+    UPDATE_SALEABLE_ERROR(400,"商品上架失败"),
+    BRAND_CREATE_FAILED(400,"品牌创建失败"),
+    INVALID_PARAM(400,"非法参数"),
+    STOCK_NOT_ENOUGH(400,"库存不足"),
+    DELETE_GOODS_ERROR(400,"删除商品异常"),
+    UPDATE_BRAND_FAILED(400,"修改品牌失败"),
+    DELETE_BRAND_EXCEPTION(400,"品牌删除失败"),
     INVAILD_USER_DATA_TYPE(400,"用户数据类型不正确")
     ;
     private int code;
