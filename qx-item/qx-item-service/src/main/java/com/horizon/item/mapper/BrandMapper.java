@@ -11,10 +11,6 @@ import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
 
-/**
- * @author bystander
- * @date 2018/9/16
- */
 @Repository
 public interface BrandMapper extends Mapper<Brand>,SelectByIdListMapper<Brand, Long> {
 

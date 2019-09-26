@@ -6,10 +6,7 @@ import com.horizon.item.pojo.Category;
 
 import java.util.List;
 
-/**
- * @author bystander
- * @date 2018/9/15
- */
+
 public interface CategoryService {
 
 

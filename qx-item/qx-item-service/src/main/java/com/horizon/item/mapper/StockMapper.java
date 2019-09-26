@@ -7,10 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
-/**
- * @author bystander
- * @date 2018/9/18
- */
+
 @Repository
 public interface StockMapper extends BaseMapper<Stock, Long> {
 
