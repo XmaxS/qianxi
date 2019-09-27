@@ -18,6 +18,7 @@
         <module name="qx-page" />
         <module name="qx-registry" />
         <module name="qx-search" />
+        <module name="qx-sms-service" />
         <module name="qx-upload" />
         <module name="qx-user-interface" />
         <module name="qx-user-service" />
@@ -42,6 +43,7 @@
       <module name="qx-page" options="-parameters" />
       <module name="qx-registry" options="-parameters" />
       <module name="qx-search" options="-parameters" />
+      <module name="qx-sms-service" options="-parameters" />
       <module name="qx-upload" options="-parameters" />
       <module name="qx-user" options="-parameters" />
       <module name="qx-user-interface" options="-parameters" />

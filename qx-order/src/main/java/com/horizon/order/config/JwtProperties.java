@@ -8,10 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import javax.annotation.PostConstruct;
 import java.security.PublicKey;
 
-/**
- * @author bystander
- * @date 2018/10/3
- */
+
 @Data
 @Slf4j
 @ConfigurationProperties(prefix = "ly.jwt")

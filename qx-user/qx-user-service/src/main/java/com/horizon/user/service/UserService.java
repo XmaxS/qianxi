@@ -30,90 +30,93 @@ public class UserService {
     @Autowired
     private StringRedisTemplate redisTemplate;
 
-    private static final String KEY_PREFIX = "user:verify:phone";
+    private static final String KEY_PREFIX = "user:verify:code:";
+
 
     public Boolean checkData(String data, Integer type) {
-
-        User record = new User();
-
-        //判断数据类型
-        switch (type){
+        User user = new User();
+        //判断校验数据的类型
+        switch (type) {
             case 1:
-                record.setUsername(data);
+                user.setUsername(data);
                 break;
             case 2:
-                record.setPhone(data);
+                user.setPhone(data);
                 break;
             default:
-                throw new QxException(ExceptionEnums.INVAILD_USER_DATA_TYPE);
+                throw new QxException(ExceptionEnums.INVALID_PARAM);
         }
-
-        return userMapper.selectCount(record) == 0;
+        return (userMapper.selectCount(user) == 0);
     }
 
-    public void sendCode(String phone) {
+    public void sendVerifyCode(String phone) {
 
-        //生成Key
-        String key = KEY_PREFIX + phone;
-
-        //生成验证码，随机6位
+        //随机生成6位数字验证码
         String code = NumberUtils.generateCode(6);
 
-        Map<String,String> msg = new HashMap<>();
-        msg.put("phone",phone);
-        msg.put("code",code);
+        String key = KEY_PREFIX + phone;
 
-        //发送验证码
-        amqpTemplate.convertAndSend("qx.item.exchange","sms.verify.code",msg);
+        //把验证码放入Redis中，并设置有效期为5min
+        redisTemplate.opsForValue().set(key, code, 5, TimeUnit.MINUTES);
 
-        //保存验证码
-        redisTemplate.opsForValue().set(key,code,5, TimeUnit.MINUTES);
-
-
+        //向mq中发送消息
+        Map<String,String> map = new HashMap<>();
+        map.put("phone", phone);
+        map.put("code", code);
+        amqpTemplate.convertAndSend("ly.sms.exchange", "sms.verify.code", map);
     }
 
     public void register(User user, String code) {
+        user.setId(null);
+        user.setCreated(new Date());
+        String key = KEY_PREFIX + user.getPhone();
 
-        //从redis中取出验证码
-        String cacheCode = redisTemplate.opsForValue().get(KEY_PREFIX + user.getPhone());
+        String value = redisTemplate.opsForValue().get(key);
 
-        //校验验证码
-        if (!StringUtils.equals(code,cacheCode)){
-            throw new QxException(ExceptionEnums.INVALID_VERIFY_CODE);
+        if (!StringUtils.equals(code, value)) {
+            //验证码不匹配
+            throw new QxException(ExceptionEnums.VERIFY_CODE_NOT_MATCHING);
         }
 
         //生成盐
-        String salt = CodecUtils.genereteSalt();
+        String salt = CodecUtils.generateSalt();
         user.setSalt(salt);
 
-        //对密码进行加密,MD5加密并添加盐值
-        CodecUtils.md5Hex(user.getPassword(),salt);
+        //生成密码
+        String md5Pwd = CodecUtils.md5Hex(user.getPassword(), user.getSalt());
 
-        //保存数据
-        user.setCreated(new Date());
-        userMapper.insert(user);
+        user.setPassword(md5Pwd);
+
+        //保存到数据库
+        int count = userMapper.insert(user);
+
+        if (count != 1) {
+            throw new QxException(ExceptionEnums.INVALID_PARAM);
+        }
+
+        //把验证码从Redis中删除
+        redisTemplate.delete(key);
+
 
     }
 
-    public User queryUserByUsernameAndPassword(String username, String password) {
-
-        //查询用户
+    public User queryUser(String username, String password) {
         User record = new User();
         record.setUsername(username);
+
+        //首先根据用户名查询用户
         User user = userMapper.selectOne(record);
 
-        //校验
-        if (user == null){
-            throw new QxException(ExceptionEnums.INVALID_USERNAME_PASSWORD);
+        if (user == null) {
+            throw new QxException(ExceptionEnums.USER_NOT_EXIST);
         }
 
-        //校验密码
-        if (!StringUtils.equals(user.getPassword(), CodecUtils.md5Hex(password,user.getSalt()))) {
-            throw new QxException(ExceptionEnums.INVALID_USERNAME_PASSWORD);
+        //检验密码是否正确
+        if (!StringUtils.equals(CodecUtils.md5Hex(password, user.getSalt()), user.getPassword())) {
+            //密码不正确
+            throw new QxException(ExceptionEnums.PASSWORD_NOT_MATCHING);
         }
 
-        //用户名和密码正确
         return user;
-
     }
 }

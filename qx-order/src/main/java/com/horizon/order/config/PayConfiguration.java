@@ -6,10 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
-/**
- * @author bystander
- * @date 2018/10/5
- */
+
 @Configuration
 public class PayConfiguration {
 

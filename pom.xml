@@ -20,6 +20,7 @@
         <module>qx-auth-center</module>
         <module>qx-cart</module>
         <module>qx-order</module>
+        <module>qx-sms-service</module>
     </modules>
 
     <parent>
@@ -38,6 +39,8 @@
         <fastDFS.client.version>1.26.7</fastDFS.client.version>
         <mapper.starter.version>2.0.3</mapper.starter.version>
         <pageHelper.version>1.2.12</pageHelper.version>
+        <qianxi.latest.version>1.0.0-SNAPSHOT</qianxi.latest.version>
+        <fastDFS.client.version>1.26.1-RELEASE</fastDFS.client.version>
     </properties>
 
     <!--子工程需要手动引入-->
@@ -63,6 +66,7 @@
                 <artifactId>mapper-spring-boot-starter</artifactId>
                 <version>${mapper.starter.version}</version>
             </dependency>
+            <!--fastdfs客户端-->
             <dependency>
                 <groupId>com.github.tobato</groupId>
                 <artifactId>fastdfs-client</artifactId>

@@ -7,6 +7,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 //跨域过滤器
+/**
+ * 使用CORS，用于解决ajax跨域访问问题
+ */
 @Configuration
 public class GlobalCorsConfig {
 

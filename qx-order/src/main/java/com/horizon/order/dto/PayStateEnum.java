@@ -1,9 +1,6 @@
 package com.horizon.order.dto;
 
-/**
- * @author bystander
- * @date 2018/10/5
- */
+
 public enum PayStateEnum {
 
     NOT_PAY(0), SUCCESS(1), FAIL(2);

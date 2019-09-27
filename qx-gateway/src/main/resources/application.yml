@@ -12,6 +12,8 @@ zuul:
     search-service: /search/**
     user-service: /user/**
     auth-service: /auth/**
+    cart-service: /cart/**
+    order-service: /order-service/**
     upload-service:
       path: /upload/**
       serviceId: upload-service
@@ -31,8 +33,8 @@ eureka:
       defaultZone: http://127.0.0.1:10086/eureka
 
 ribbon:
-  ConnectTimeout: 1000        #ribbon链接超时时长
-  ReadTimeout: 3500           #ribbon读取超时时长
+  ConnectTimeout: 500        #ribbon链接超时时长
+  ReadTimeout: 5000           #ribbon读取超时时长
   MaxAutoRetries: 0           #当前服务重试次数
   MaxAutoRetriesNextServer: 0 #切换服务重试次数
 

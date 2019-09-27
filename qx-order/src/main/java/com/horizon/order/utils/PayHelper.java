@@ -27,10 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author bystander
- * @date 2018/10/5
- */
+
 @Slf4j
 @Component
 public class PayHelper {

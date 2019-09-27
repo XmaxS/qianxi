@@ -2,10 +2,7 @@ package com.horizon.cart.pojo;
 
 import lombok.Data;
 
-/**
- * @author bystander
- * @date 2018/10/3
- */
+
 @Data
 public class Cart {
 

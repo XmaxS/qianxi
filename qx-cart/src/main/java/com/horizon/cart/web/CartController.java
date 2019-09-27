@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * @author bystander
- * @date 2018/10/3
- */
+
 @RestController
 public class CartController {
 

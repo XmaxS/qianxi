@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Data
-@Document(indexName = "goods", type = "docs", shards = 1, replicas = 0)
+@Document(indexName = "goods", type = "docs", shards = 1, replicas = 1)
 public class Goods {
 
     @Id
@@ -21,14 +21,15 @@ public class Goods {
     private String all; //所有需要被搜索的信息，包含标题，分类，甚至品牌
 
     @Field(type = FieldType.Keyword, index = false)
-    private String subTitle; //卖点
+    private String subtitle; //父标题
 
     private Long brandId; //品牌Id
     private Long cid1; //一级分类Id
     private Long cid2; //二级分类Id
     private Long cid3; //三级分类Id
+
     private Date createTime; //spu创建时间
-    private Set<Long> price; //价格
+    private Set<Double> price; //价格
 
     @Field(type = FieldType.Keyword, index = false)
     private String skus; //sku信息的json结构

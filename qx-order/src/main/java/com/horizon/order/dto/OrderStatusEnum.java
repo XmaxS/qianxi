@@ -1,9 +1,6 @@
 package com.horizon.order.dto;
 
-/**
- * @author bystander
- * @date 2018/10/5
- */
+
 public enum  OrderStatusEnum {
 
     INIT(1, "初始化，未付款"),

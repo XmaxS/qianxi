@@ -3,13 +3,12 @@ package com.horizon.search.pojo;
 import com.horizon.common.vo.PageResult;
 import com.horizon.item.pojo.Brand;
 import com.horizon.item.pojo.Category;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
-@Slf4j
-public class SearchResult extends PageResult<Goods> {
+public class SearchResult<Goods> extends PageResult<Goods> {
     private List<Category> categories; //分类待选项
     private List<Brand> brands; //品牌待选项
     private List<Map<String,Object>> specs; //规格参数 key及待选项
@@ -31,6 +30,14 @@ public class SearchResult extends PageResult<Goods> {
         this.specs = specs;
     }
 
+    public List<Map<String, Object>> getSpecs() {
+        return specs;
+    }
+
+    public void setSpecs(List<Map<String, Object>> specs) {
+        this.specs = specs;
+    }
+
     public List<Category> getCategories() {
         return categories;
     }
@@ -46,4 +53,22 @@ public class SearchResult extends PageResult<Goods> {
     public void setBrands(List<Brand> brands) {
         this.brands = brands;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        SearchResult<?> that = (SearchResult<?>) o;
+        return Objects.equals(brands, that.brands) &&
+                Objects.equals(categories, that.categories) &&
+                Objects.equals(specs, that.specs);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(super.hashCode(), brands, categories, specs);
+    }
+
 }

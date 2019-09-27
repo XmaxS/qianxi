@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * @author bystander
- * @date 2018/10/4
- */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

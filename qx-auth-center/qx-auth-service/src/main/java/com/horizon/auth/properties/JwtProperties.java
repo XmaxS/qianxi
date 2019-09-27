@@ -11,7 +11,6 @@ import java.io.File;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
-@Component
 @Slf4j
 @Data
 @ConfigurationProperties(prefix = "ly.jwt")

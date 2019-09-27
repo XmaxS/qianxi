@@ -15,10 +15,7 @@ import org.springframework.util.CollectionUtils;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @author bystander
- * @date 2018/10/3
- */
+
 @Service
 @Slf4j
 public class CartService {

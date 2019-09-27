@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 public interface BrandApi {
-    //根据id查询品牌
     @GetMapping("brand/{id}")
-    Brand queryBrandById(@PathVariable("id")Long id);
+    Brand queryById(@PathVariable("id") Long id);
 
     @GetMapping("brand/list")
-    List<Brand> queryBrandByIds(@RequestParam("ids")List<Long> ids);
+    List<Brand> queryBrandsByIds(@RequestParam("ids") List<Long> ids);
 }

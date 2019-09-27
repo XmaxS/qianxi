@@ -13,10 +13,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * @author bystander
- * @date 2018/10/3
- */
+
 @EnableConfigurationProperties(JwtProperties.class)
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 

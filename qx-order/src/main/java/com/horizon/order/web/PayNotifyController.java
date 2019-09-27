@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
-/**
- * @author bystander
- * @date 2018/10/5
- */
+
 @RestController
 @Slf4j
 public class PayNotifyController {

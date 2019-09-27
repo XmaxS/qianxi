@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-/**
- * @author bystander
- * @date 2018/10/4
- */
+
 @RestController
 @RequestMapping("order")
 public class OrderController {

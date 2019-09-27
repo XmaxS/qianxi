@@ -3,8 +3,13 @@ package com.horizon.service;
 import com.horizon.client.BrandClient;
 import com.horizon.client.CategoryClient;
 import com.horizon.client.GoodsClient;
+import com.horizon.client.SpecClient;
+import com.horizon.common.enums.ExceptionEnums;
+import com.horizon.common.exception.QxException;
 import com.horizon.item.pojo.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -17,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@Slf4j
 public class PageService {
 
     @Autowired
@@ -29,61 +35,64 @@ public class PageService {
     private GoodsClient goodsClient;
 
     @Autowired
+    private SpecClient specClient;
+
+    @Autowired
     private TemplateEngine templateEngine;
+
+    @Value("${ly.page.path}")
+    private String dest;
 
     public Map<String, Object> loadModel(Long spuId) {
         Map<String, Object> model = new HashMap<>();
+        Spu spu = goodsClient.querySpuBySpuId(spuId);
 
-        //查询spu
-        Spu spu = goodsClient.querySpuById(spuId);
-        //查询skus
-        List<Sku> skus = spu.getSkus();
-        //查询详情
+        //上架未上架，则不应该查询到商品详情信息，抛出异常
+        if (!spu.getSaleable()) {
+            throw new QxException(ExceptionEnums.GOODS_NOT_SALEABLE);
+        }
+
         SpuDetail detail = spu.getSpuDetail();
-        //查询brand
-        Brand brand = brandClient.queryBrandById(spu.getBrandId());
-        //查询商品分类
-        List<Category> categories = categoryClient.queryCategoryByIds(Arrays.asList(spu.getCid1(),spu.getCid2(),spu.getCid3()));
+        List<Sku> skus = spu.getSkus();
+        Brand brand = brandClient.queryById(spu.getBrandId());
+        //查询三级分类
+        List<Category> categories = categoryClient.queryByIds(Arrays.asList(spu.getCid1(), spu.getCid2(), spu.getCid3()));
 
-        model.put("title",spu.getTitle());
-        model.put("subTitle",spu.getSubTitle());
-        model.put("skus",skus);
-        model.put("detail",detail);
-        model.put("brand",brand);
-        model.put("categories",categories);
+        List<SpecGroup> specs = specClient.querySpecsByCid(spu.getCid3());
 
+        model.put("brand", brand);
+        model.put("categories", categories);
+        model.put("spu", spu);
+        model.put("skus", skus);
+        model.put("detail", detail);
+        model.put("specs", specs);
         return model;
     }
 
-    //静态化
-    public void createHtml(Long spuId){
-        //上下文
+    public  void createHtml(Long spuId) {
         Context context = new Context();
-        context.setVariables(loadModel(spuId));
+        Map<String, Object> map = loadModel(spuId);
+        context.setVariables(map);
 
-        //输出流
-        File dest = new File("磁盘路径", spuId + ".html");
-
-        if (dest.exists()){
-            dest.delete();
+        File file = new File(this.dest, spuId + ".html");
+        //如果页面存在，先删除，后进行创建静态页
+        if (file.exists()) {
+            file.delete();
         }
-
-        //该流可以自动释放
-        try (PrintWriter writer = new PrintWriter(dest,"UTF-8")){
-            //生成html
-            templateEngine.process("item",context,writer);
+        try (PrintWriter writer = new PrintWriter(file, "utf-8")) {
+            templateEngine.process("item", context, writer);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("【静态页服务】生成静态页面异常", e);
         }
-
     }
 
-    public void deleteHtml(Long spuId) {
-
-        File dest = new File("磁盘路径", spuId + ".html");
-
-        if(dest.exists()){
-            dest.delete();
+    public void deleteHtml(Long id) {
+        File file = new File(this.dest + id + ".html");
+        if (file.exists()) {
+            boolean flag = file.delete();
+            if (!flag) {
+                log.error("删除静态页面失败");
+            }
         }
     }
 }

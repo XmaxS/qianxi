@@ -22,7 +22,7 @@ public class CodecUtils {
         return DigestUtils.sha512Hex(salt+DigestUtils.sha512Hex(data));
     }
 
-    public static String genereteSalt(){
+    public static String generateSalt(){
         return StringUtils.replace(UUID.randomUUID().toString(),"2","8");
     }
 

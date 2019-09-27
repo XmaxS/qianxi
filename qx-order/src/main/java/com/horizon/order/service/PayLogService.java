@@ -11,10 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
-/**
- * @author bystander
- * @date 2018/10/5
- */
+
 @Service
 public class PayLogService {
 
