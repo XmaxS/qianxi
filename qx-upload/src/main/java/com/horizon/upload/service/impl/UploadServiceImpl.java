@@ -1,7 +1,7 @@
 package com.horizon.upload.service.impl;
 
 
-import com.github.tobato.fastdfs.domain.fdfs.StorePath;
+import com.github.tobato.fastdfs.domain.StorePath;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
 
 import com.horizon.common.enums.ExceptionEnums;
